@@ -8,6 +8,11 @@
 
 <br/>
 
+## Gameplay
+
+<p><img width="250" alt="Morpion gameplay" src="images/gameplay.gif"></a></p>
+
+
 ## Dépendance
 
 - PySide6
