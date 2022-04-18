@@ -102,7 +102,8 @@ class Morpion:
         """
         Meilleur coup pour l'ordinateur
         
-        Cette fonction doit créer une grille virtuelle,
+        
+        Cette fonction doit créer une grille virtuelle
         
         - Pour voir si un coup est potentiellement gagnant en ramplant chaque " " 
         de la grille virtuelle par le symbole de l'ordinateur, pour voir si le coup donné par l'ordi peut etre gagnant, si non,
@@ -182,7 +183,6 @@ class Morpion:
             
         # Sinon l'ordinateur joue son meilleur coup
         
-        
         # tentative de jouer au centre sauf au deuxieme tour si l'ordinateur commence à jouer
         if self.tour > 1:
             if self.placeInTheGrille(4) : return
@@ -257,7 +257,7 @@ if __name__ == "__main__":
     # Initialisation du jeu
     game = Morpion(player1, whoStart, playWithAI)
     
-    #Pour ne pas afficher d'erreur dans le terminal si le joueur fait un Ctrl+C pour quitter le programme
+    #Pour ne pas afficher d'erreur dans le terminal si le joueur fait un 'Ctrl+C' pour quitter le programme
     try:
         
         while not game.isWin and not game.checkEquality():
@@ -268,11 +268,11 @@ if __name__ == "__main__":
             #Affichage de la grille
             game.displayGrille()
             
+            #Si un joueur a voulu jouer contre l'ordinateur, l'oridnateur joue, sinon un joueur joue
             if game.playWithAI == True and game.whoPlay == game.computerOrPlayer2:
                 game.bestMoveForAI()
             else:
-                
-                #Affichage du nom du joueur
+                #Affichage du nom du joueur qui doit jouer
                 print(f"\n[!] Au tour de '{game.whoPlay}'")
                 
                 #Vérification de la validité du coup joué
