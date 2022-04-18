@@ -46,6 +46,9 @@ class Morpion:
 
         Returns:
             bool: Renvoie True si la partie est gagnée, sinon False
+        
+        
+        Pour vérifier une victoire, on doit vrifier si la grille contient 3 symboles identiques dans une ligne, une colonne ou une diagonale
         """
         
         #Vérification des lignes puis colonnes puis diagonales
@@ -68,6 +71,9 @@ class Morpion:
 
         Returns:
             bool: Renvoie True si la partie est nulle, sinon False
+        
+        
+        Si la partie admet une égalité (nulle), elle comporte + ou = à 9 tours
         """
         
         return self.tour >= 9
@@ -81,6 +87,9 @@ class Morpion:
 
         Returns:
             bool: Renvoie True si le coup a été placé, sinon False
+        
+        
+        Si le coup du joueur qui joue est possible, on place le symbole dans la case et on renvoie True, sinon on renvoie False
         """
     
         if self.grille[move] == " ":
@@ -91,7 +100,56 @@ class Morpion:
 
     def bestMoveForAI(self):
         """
-        Try all possible combinations to win or prevent the player from winning
+        Meilleur coup pour l'ordinateur
+        
+        Cette fonction doit créer une grille virtuelle,
+        
+        - Pour voir si un coup est potentiellement gagnant en ramplant chaque " " 
+        de la grille virtuelle par le symbole de l'ordinateur, pour voir si le coup donné par l'ordi peut etre gagnant, si non,
+        on remet " " à la place du symbole mis par l'ordi.
+        
+        - Puis on vérifie la même chose pour le joueur, pour pouvoir le bloqué.
+        
+        - Sinon, on essaye de jouer le meilleur coup possible.
+            -> On joue au centre si possible dès le second tour
+            -> Si le joueur joue un angle, on joue sur l'arrête dans le sens des aiguilles d'une montre (si possible)
+                Ex:
+                        Si le joueur = "X", l'ordinateur = "O"
+                    
+                        ╔═══╦═══╦═══╗           ╔═══╦═══╦═══╗
+                        ║ X ║   ║   ║           ║ X ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║       ->  ║ O ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║           ║   ║   ║   ║
+                        ╚═══╩═══╩═══╝           ╚═══╩═══╩═══╝
+                        
+                        ╔═══╦═══╦═══╗           ╔═══╦═══╦═══╗
+                        ║   ║   ║   ║           ║   ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║       ->  ║   ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║ X ║   ║   ║           ║ X ║ O ║   ║
+                        ╚═══╩═══╩═══╝           ╚═══╩═══╩═══╝
+                        
+                        ╔═══╦═══╦═══╗           ╔═══╦═══╦═══╗
+                        ║   ║   ║   ║           ║   ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║       ->  ║   ║   ║ O ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║ X ║           ║   ║   ║ X ║
+                        ╚═══╩═══╩═══╝           ╚═══╩═══╩═══╝
+                        
+                        ╔═══╦═══╦═══╗           ╔═══╦═══╦═══╗
+                        ║   ║   ║ X ║           ║   ║ O ║ X ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║       ->  ║   ║   ║   ║
+                        ╠═══╬═══╬═══╣           ╠═══╬═══╬═══╣
+                        ║   ║   ║   ║           ║   ║   ║   ║
+                        ╚═══╩═══╩═══╝           ╚═══╩═══╩═══╝
+                        
+            -> Sinon en tente de jouer dans les angles si possible
+        
         """
         grille = self.grille
         # On regarde le meilleur coup pour l' ordinateur
@@ -149,7 +207,7 @@ class Morpion:
 
 def clear():
     """
-    Clear the terminal
+    Efface le contenu de la console
     """
     system('cls' if name == 'nt' else 'clear')
         
@@ -157,7 +215,7 @@ def clear():
 
 if __name__ == "__main__":
     
-    #importation des fonctions 'system' et 'name' de la bibliothèque 'os' pour effacer le terminal
+    #importation des fonctions 'system' et 'name' de la bibliothèque 'os' pour effacer le contenu de la console
     from os import system, name
     
     
