@@ -27,8 +27,7 @@ Window{
     // SET MATERIAL STYLE
     Material.theme: Material.Dark
     Material.accent: Material.LightBlue
-
-    
+    FontLoader { id: alfaSlabOneFont; source: "../images/fonts/Alfa_Slab_One/AlfaSlabOne.ttf" }
 
     
 
@@ -54,8 +53,6 @@ Window{
 
         }
 
-
-
         function retourPlay(){
             recAccueil.visible = true
             recPlay.visible = false
@@ -68,28 +65,6 @@ Window{
             recPlay.visible = true
             recAide.visible = false
         }
-
-        function nextRound(nb_allumettes_retiree){
-
-            if(btnAllumettes1.opacity == .25){btnAllumettes1.visible = false}
-            if(btnAllumettes2.opacity == .25){btnAllumettes2.visible = false}
-            if(btnAllumettes3.opacity == .25){btnAllumettes3.visible = false}
-            if(btnAllumettes4.opacity == .25){btnAllumettes4.visible = false}
-            if(btnAllumettes5.opacity == .25){btnAllumettes5.visible = false}
-            if(btnAllumettes6.opacity == .25){btnAllumettes6.visible = false}
-            if(btnAllumettes7.opacity == .25){btnAllumettes7.visible = false}
-            if(btnAllumettes8.opacity == .25){btnAllumettes8.visible = false}
-            if(btnAllumettes9.opacity == .25){btnAllumettes9.visible = false}
-            if(btnAllumettes10.opacity == .25){btnAllumettes10.visible = false}
-            if(btnAllumettes11.opacity == .25){btnAllumettes11.visible = false}
-            if(btnAllumettes12.opacity == .25){btnAllumettes12.visible = false}
-
-            backend.nextRound(nb_allumettes_retiree)
-
-        }
-
-
-
 
     }
 
@@ -109,34 +84,63 @@ Window{
         anchors.top: parent.top
         anchors.topMargin: 35
 
-        Image{
-            id: imgLogo
-            x: 50
-            y: 14
-            width: 124
-            height: 124
-            source: "../images/logoMorpion.png"
-            anchors.horizontalCenterOffset: 0
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 47
+        Image {
+            id: backgroundAcceil
+            x: 41
+            y: 23
+            anchors.fill: parent
+            source: "../images/bg.jpg"
+            anchors.rightMargin: -201
+            anchors.bottomMargin: -182
+            anchors.leftMargin: -200
+            anchors.topMargin: -114
+            fillMode: Image.PreserveAspectFit
         }
 
-        Text{
-            id: lblExplication
-            x: 166
-            y: 230
-            width: 123
-            height: 63
-            text: qsTr("Morpion")
-            anchors.verticalCenter: parent.verticalCenter
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            anchors.verticalCenterOffset: -59
-            anchors.horizontalCenterOffset: 1
-            color: "#ffffff"
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 17
+        Rectangle {
+            id: recLogo
+            x: 60
+            height: 221
+            color: "#9069fa"
+            radius: 10
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: 60
+            anchors.leftMargin: 66
+            anchors.topMargin: 26
+            anchors.rightMargin: 65
+
+            Image{
+                id: imgLogo
+                x: 78
+                y: 23
+                width: 124
+                height: 124
+                source: "../images/logoMorpion.png"
+                anchors.horizontalCenterOffset: -1
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 28
+            }
+
+            Text{
+                id: lblExplication
+                x: 79
+                y: 158
+                width: 123
+                height: 63
+                text: qsTr("Morpion")
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font { family: alfaSlabOneFont.name; pointSize: 17}
+                anchors.verticalCenterOffset: 79
+                anchors.horizontalCenterOffset: 7
+                color: "#ffffff"
+                anchors.horizontalCenter: parent.horizontalCenter
+
+            }
         }
 
         Switch {
@@ -195,7 +199,7 @@ Window{
                 id: recNameOfRec
                 x: 60
                 height: 40
-                color: "#3d1952"
+                color: "#9069fa"
                 radius: 10
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -288,102 +292,10 @@ Window{
         }
 
 
-
     }
 
 
 
-
-
-    Rectangle {
-        id: recTopBar
-        x: 0
-        y: 0
-        width: 400
-        height: 35
-        color: "#151515"
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-
-
-        Image {
-            id: iconApp
-            width: 36
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            source: "../images/iconMorpion.png"
-            anchors.leftMargin: 3
-            anchors.bottomMargin: 3
-            anchors.topMargin: 3
-            fillMode: Image.PreserveAspectFit
-        }
-
-        Row {
-            id: rowBtns
-            x: 330
-            width: 70
-            height: 35
-            visible: true
-            anchors.right: parent.right
-            anchors.top: parent.top
-            smooth: false
-            enabled: true
-            padding: 0
-            topPadding: 0
-            anchors.topMargin: 0
-            anchors.rightMargin: 0
-
-            TopBarButton{
-                id: btnMinimize
-                width: 35
-                height: 35
-                horizontalPadding: 4
-                padding: 4
-                btnColorDefault: "#1c1d20"
-                bottomPadding: 4
-                autoRepeatDelay: 300
-                btnColorClicked: "#3d1952"
-                onClicked: {
-                    window.showMinimized()
-                }
-            }
-
-
-
-            TopBarButton {
-                id: btnClose
-                btnColorClicked: "#ff0000"
-                btnIconSource: "../../images/svg_images/close_icon.svg"
-                onClicked: window.close()
-            }
-        }
-
-        Label {
-            id: lblNameOfGame
-            x: 46
-            width: 241
-            color: "#c3cbdd"
-            text: qsTr("Morpion")
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            verticalAlignment: Text.AlignVCenter
-            anchors.bottomMargin: 0
-            anchors.topMargin: 0
-            anchors.rightMargin: 113
-            font.pointSize: 10
-            anchors.leftMargin: 5
-        }
-
-        DragHandler {
-            onActiveChanged: if(active){
-                                 window.startSystemMove()
-                             }
-        }
-
-    }
 
     Rectangle {
         id: recPlay
@@ -398,9 +310,22 @@ Window{
         anchors.bottomMargin: 0
         anchors.topMargin: 35
 
+        Image {
+            id: backgroundPlay
+            x: 41
+            y: 23
+            anchors.fill: parent
+            source: "../images/bg.jpg"
+            anchors.rightMargin: -201
+            anchors.bottomMargin: -182
+            anchors.leftMargin: -200
+            anchors.topMargin: -114
+            fillMode: Image.PreserveAspectFit
+        }
+
         Rectangle {
             id: recInfo
-            color: "#3d1952"
+            color: "#9069fa"
             radius: 10
             anchors.left: parent.left
             anchors.right: parent.right
@@ -771,33 +696,29 @@ Window{
         anchors.leftMargin: 0
         anchors.bottomMargin: 0
         anchors.topMargin: 35
+
         Image {
-            id: imgLogo1
-            x: 50
-            y: 14
-            width: 124
-            height: 124
-            anchors.top: parent.top
-            source: "../images/logoMorpion.png"
-            anchors.topMargin: 47
-            anchors.horizontalCenterOffset: 0
-            anchors.horizontalCenter: parent.horizontalCenter
+            id: backgroundAide
+            x: 41
+            y: 23
+            anchors.fill: parent
+            source: "../images/bg.jpg"
+            anchors.rightMargin: -201
+            anchors.bottomMargin: -182
+            anchors.leftMargin: -200
+            anchors.topMargin: -114
+            fillMode: Image.PreserveAspectFit
         }
 
         Rectangle {
             id: recExplication1
-            x: 60
-            y: 194
-            height: 216
-            color: "#3d1952"
+            x: 66
+            y: 274
+            width: 269
+            height: 203
+            color: "#9069fa"
             radius: 10
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: imgLogo1.bottom
             anchors.margins: 60
-            anchors.rightMargin: 50
-            anchors.topMargin: 47
-            anchors.leftMargin: 60
             Text {
                 id: lblExplication1
                 width: 245
@@ -805,9 +726,11 @@ Window{
                 color: "#ffffff"
                 text: qsTr("Deux joueurs posent tour à tour un rond, pour l’un, une croix, pour l’autre, dans une grille de 3 cases par 3. Le but du jeu est d’obtenir un alignement (en ligne, colonne ou diagonale) de ses trois signes.")
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.bottom: parent.bottom
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.Wrap
+                anchors.bottomMargin: 17
                 font.pointSize: 10
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -825,6 +748,141 @@ Window{
             z: 0
             onClicked: internal.retourAide()
         }
+
+        Rectangle {
+            id: recLogo1
+            x: 60
+            height: 221
+            color: "#9069fa"
+            radius: 10
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: 60
+            Image {
+                id: imgLogo2
+                x: 78
+                y: 23
+                width: 124
+                height: 124
+                anchors.top: parent.top
+                source: "../images/logoMorpion.png"
+                anchors.horizontalCenterOffset: -1
+                anchors.topMargin: 28
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            Text {
+                id: lblExplication2
+                x: 79
+                y: 158
+                width: 123
+                height: 63
+                color: "#ffffff"
+                text: qsTr("Morpion")
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pointSize: 17
+                anchors.horizontalCenterOffset: 7
+                anchors.verticalCenterOffset: 79
+                font.family: alfaSlabOneFont.name
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            anchors.leftMargin: 66
+            anchors.topMargin: 26
+            anchors.rightMargin: 65
+        }
+    }
+
+    Rectangle {
+        id: recTopBar
+        x: 0
+        y: 0
+        width: 400
+        height: 35
+        color: "#151515"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+
+        Image {
+            id: iconApp
+            width: 36
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            source: "../images/iconMorpion.png"
+            anchors.leftMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Row {
+            id: rowBtns
+            x: 330
+            width: 70
+            height: 35
+            visible: true
+            anchors.right: parent.right
+            anchors.top: parent.top
+            smooth: false
+            enabled: true
+            padding: 0
+            topPadding: 0
+            anchors.topMargin: 0
+            anchors.rightMargin: 0
+
+            TopBarButton{
+                id: btnMinimize
+                width: 35
+                height: 35
+                horizontalPadding: 4
+                padding: 4
+                btnColorDefault: "#1c1d20"
+                bottomPadding: 4
+                autoRepeatDelay: 300
+                btnColorClicked: "#9069fa"
+                onClicked: {
+                    window.showMinimized()
+                }
+            }
+
+
+
+            TopBarButton {
+                id: btnClose
+                btnColorClicked: "#ff0000"
+                btnIconSource: "../../images/svg_images/close_icon.svg"
+                onClicked: window.close()
+            }
+        }
+
+        Label {
+            id: lblNameOfGame
+            x: 46
+            width: 241
+            color: "#c3cbdd"
+            text: qsTr("Morpion")
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            verticalAlignment: Text.AlignVCenter
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.rightMargin: 113
+            font.pointSize: 10
+            anchors.leftMargin: 5
+        }
+
+        DragHandler {
+            onActiveChanged: if(active){
+                                 window.startSystemMove()
+                             }
+        }
+
     }
 
 
