@@ -150,6 +150,8 @@ class Morpion:
                         
             -> Sinon en tente de jouer dans les angles si possible
         
+        (il est fortement conseillé d'utiliser la fonction placeInTheGrille() pour vérifier le coup)
+        
         """
         grille = self.grille
         # On regarde le meilleur coup pour l' ordinateur
