@@ -47,6 +47,15 @@ Window{
             imgCase7.source = ""
             imgCase8.source = ""
             imgCase9.source = ""
+            btnCase1.hoverEnabled = true
+            btnCase2.hoverEnabled = true
+            btnCase3.hoverEnabled = true
+            btnCase4.hoverEnabled = true
+            btnCase5.hoverEnabled = true
+            btnCase6.hoverEnabled = true
+            btnCase7.hoverEnabled = true
+            btnCase8.hoverEnabled = true
+            btnCase9.hoverEnabled = true
             backend.start(switchForSigne.text, switchSigneForWhoStart.text, playWithComputer)
             recPlay.visible = true
             recAccueil.visible = false
@@ -395,7 +404,6 @@ Window{
                 height: 60
                 text: qsTr("")
                 highlighted: true
-                hoverEnabled: true
                 topInset: 0
                 flat: true
 
@@ -894,58 +902,76 @@ Window{
 
         function onGrille(grille){
 
-            if(grille[0]== "X"){
+            if(grille[0] === "X"){
                 imgCase1.source = "../images/cross.png"
-            }else if(grille[0]== "O"){
+                btnCase1.hoverEnabled = false
+            }else if(grille[0] === "O"){
                 imgCase1.source = "../images/circle.png"
+                btnCase1.hoverEnabled = false
             }
             
-            if(grille[1]== "X"){
+            if(grille[1] === "X"){
                 imgCase2.source = "../images/cross.png"
-            }else if(grille[1]== "O"){
+                btnCase2.hoverEnabled = false
+            }else if(grille[1] === "O"){
                 imgCase2.source = "../images/circle.png"
+                btnCase2.hoverEnabled = false
             }
 
-            if(grille[2]== "X"){
+            if(grille[2] === "X"){
                 imgCase3.source = "../images/cross.png"
-            }else if(grille[2]== "O"){
+                btnCase3.hoverEnabled = false
+            }else if(grille[2] === "O"){
                 imgCase3.source = "../images/circle.png"
+                btnCase3.hoverEnabled = false
             }
 
-            if(grille[3]== "X"){
+            if(grille[3] === "X"){
                 imgCase4.source = "../images/cross.png"
-            }else if(grille[3]== "O"){
+                btnCase4.hoverEnabled = false
+            }else if(grille[3] === "O"){
                 imgCase4.source = "../images/circle.png"
+                btnCase4.hoverEnabled = false
             }
 
-            if(grille[4]== "X"){
+            if(grille[4] === "X"){
                 imgCase5.source = "../images/cross.png"
-            }else if(grille[4]== "O"){
+                btnCase5.hoverEnabled = false
+            }else if(grille[4] === "O"){
                 imgCase5.source = "../images/circle.png"
+                btnCase5.hoverEnabled = false
             }
 
-            if(grille[5]== "X"){
+            if(grille[5] === "X"){
                 imgCase6.source = "../images/cross.png"
-            }else if(grille[5]== "O"){
+                btnCase6.hoverEnabled = false
+            }else if(grille[5] === "O"){
                 imgCase6.source = "../images/circle.png"
+                btnCase6.hoverEnabled = false
             }
 
-            if(grille[6]== "X"){
+            if(grille[6] === "X"){
                 imgCase7.source = "../images/cross.png"
-            }else if(grille[6]== "O"){
+                btnCase7.hoverEnabled = false
+            }else if(grille[6] === "O"){
                 imgCase7.source = "../images/circle.png"
+                btnCase7.hoverEnabled = false
             }
 
-            if(grille[7]== "X"){
+            if(grille[7] === "X"){
                 imgCase8.source = "../images/cross.png"
-            }else if(grille[7]== "O"){
+                btnCase8.hoverEnabled = false
+            }else if(grille[7] === "O"){
                 imgCase8.source = "../images/circle.png"
+                btnCase8.hoverEnabled = false
             }
 
-            if(grille[8]== "X"){
+            if(grille[8] === "X"){
                 imgCase9.source = "../images/cross.png"
-            }else if(grille[8]== "O"){
+                btnCase9.hoverEnabled = false
+            }else if(grille[8] === "O"){
                 imgCase9.source = "../images/circle.png"
+                btnCase9.hoverEnabled = false
             }
 
         }
