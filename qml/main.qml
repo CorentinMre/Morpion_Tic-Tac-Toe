@@ -1,10 +1,6 @@
 import QtQuick 2.15
-import QtQuick.Window 6.0
 import QtQuick.Controls 2.15
-import "controls"
 import QtQuick.Controls.Material 2.15
-import Qt5Compat.GraphicalEffects 6.0
-
 
 Window{
     id: window
@@ -17,9 +13,6 @@ Window{
     title: qsTr("Morpion")
 
     property bool playWithComputer: true
-
-
-
 
     // SET FLAGS
     flags: Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint | Qt.CustomizeWindowHint | Qt.MSWindowsFixedSizeDialogHint | Qt.WindowTitleHint | Qt.Window | Qt.FramelessWindowHint
@@ -37,7 +30,7 @@ Window{
 
         function play(){
             
-            btnRevenirAcceil.visible = false
+            btnBackHome.visible = false
             imgCase1.source = ""
             imgCase2.source = ""
             imgCase3.source = ""
@@ -58,53 +51,48 @@ Window{
             btnCase9.hoverEnabled = true
             backend.start(switchForSigne.text, switchSigneForWhoStart.text, playWithComputer)
             recPlay.visible = true
-            recAccueil.visible = false
+            recHome.visible = false
 
         }
 
         function retourPlay(){
-            recAccueil.visible = true
+            recHome.visible = true
             recPlay.visible = false
+            recHelp.visible = false
         }
         function aide(){
-            recAide.visible = true
-            recAccueil.visible = false
+            recHelp.visible = true
+            recPlay.visible = false
+            recHome.visible = false
         }
         function retourAide(){
             recPlay.visible = true
-            recAide.visible = false
+            recHelp.visible = false
+            recHome.visible = false
         }
 
     }
 
+
+    Image {
+        id: background
+        x: 0
+        y: 35
+        anchors.fill: parent
+        source: "../images/bg.jpg"
+        fillMode: Image.TileHorizontally
     
 
-
-    
-    
 
     Rectangle {
-        id: recAccueil
+        id: recHome
         x: 0
         width: 400
         height: 545
         visible: true
-        color: "#50206c"
+        color: "#00ffffff"
         anchors.top: parent.top
         anchors.topMargin: 35
-
-        Image {
-            id: backgroundAcceil
-            x: 41
-            y: 23
-            anchors.fill: parent
-            source: "../images/bg.jpg"
-            anchors.rightMargin: -201
-            anchors.bottomMargin: -182
-            anchors.leftMargin: -200
-            anchors.topMargin: -114
-            fillMode: Image.PreserveAspectFit
-        }
 
         Rectangle {
             id: recLogo
@@ -134,7 +122,7 @@ Window{
             }
 
             Text{
-                id: lblExplication
+                id: lblNameApp
                 x: 79
                 y: 158
                 width: 123
@@ -153,7 +141,7 @@ Window{
         }
 
         Switch {
-            id: switch1
+            id: switchPlayWithBotOrPlayer
             x: 150
             y: 279
             width: 101
@@ -161,9 +149,9 @@ Window{
             layer.enabled: false
             
             onClicked : {
-                if (switch1.checked) {
+                if (switchPlayWithBotOrPlayer.checked) {
                     lblNameOfRec.text = "Jouer à deux"
-                    lblSigne.visible = false
+                    lblSign.visible = false
                     switchForSigne.visible = false
                     lblWhoStart.x = 140
                     switchSigneForWhoStart.x = 141
@@ -171,7 +159,7 @@ Window{
                 }
                 else {
                     lblNameOfRec.text = "Jouer contre l'ordinateur"
-                    lblSigne.visible = true
+                    lblSign.visible = true
                     switchForSigne.visible = true
                     lblWhoStart.x = 238
                     switchSigneForWhoStart.x = 238
@@ -237,7 +225,7 @@ Window{
                 width: 103
                 height: 32
                 text: "X"
-                anchors.top: lblSigne.bottom
+                anchors.top: lblSign.bottom
                 anchors.topMargin: 14
 
                 onClicked : {
@@ -251,7 +239,7 @@ Window{
             }
 
             Text {
-                id: lblSigne
+                id: lblSign
                 color: "#ffffff"
                 text: qsTr("Quel signe veux-tu?")
                 anchors.verticalCenter: parent.verticalCenter
@@ -273,7 +261,7 @@ Window{
                 width: 103
                 height: 32
                 text: "X"
-                anchors.top: lblSigne.bottom
+                anchors.top: lblSign.bottom
                 anchors.topMargin: 14
                 onClicked: {
                     if (switchSigneForWhoStart.checked) {
@@ -309,7 +297,7 @@ Window{
     Rectangle {
         id: recPlay
         visible: false
-        color: "#50206c"
+        color: "#00ffffff"
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -318,19 +306,6 @@ Window{
         anchors.leftMargin: 0
         anchors.bottomMargin: 0
         anchors.topMargin: 35
-
-        Image {
-            id: backgroundPlay
-            x: 41
-            y: 23
-            anchors.fill: parent
-            source: "../images/bg.jpg"
-            anchors.rightMargin: -201
-            anchors.bottomMargin: -182
-            anchors.leftMargin: -200
-            anchors.topMargin: -114
-            fillMode: Image.PreserveAspectFit
-        }
 
         Rectangle {
             id: recInfo
@@ -360,7 +335,7 @@ Window{
         }
 
         Button {
-            id: btnRetourPlay
+            id: btnBackPlay
             x: 16
             width: 79
             height: 37
@@ -373,7 +348,7 @@ Window{
         }
 
         Button {
-            id: btnAide
+            id: btnHelp
             x: 313
             width: 79
             height: 37
@@ -386,7 +361,7 @@ Window{
         }
 
         Image {
-            id: image
+            id: imgBackgroundMorpion
             x: 60
             y: 160
             width: 290
@@ -675,7 +650,7 @@ Window{
         }
 
         Button {
-            id: btnRevenirAcceil
+            id: btnBackHome
             x: 128
             width: 154
             height: 57
@@ -693,9 +668,9 @@ Window{
     }
 
     Rectangle {
-        id: recAide
+        id: recHelp
         visible: false
-        color: "#50206c"
+        color: "#00ffffff"
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -705,21 +680,8 @@ Window{
         anchors.bottomMargin: 0
         anchors.topMargin: 35
 
-        Image {
-            id: backgroundAide
-            x: 41
-            y: 23
-            anchors.fill: parent
-            source: "../images/bg.jpg"
-            anchors.rightMargin: -201
-            anchors.bottomMargin: -182
-            anchors.leftMargin: -200
-            anchors.topMargin: -114
-            fillMode: Image.PreserveAspectFit
-        }
-
         Rectangle {
-            id: recExplication1
+            id: recRules
             x: 66
             y: 274
             width: 269
@@ -745,7 +707,7 @@ Window{
         }
 
         Button {
-            id: btnRetourAide
+            id: btnBackHelp
             x: 16
             width: 79
             height: 37
@@ -758,7 +720,7 @@ Window{
         }
 
         Rectangle {
-            id: recLogo1
+            id: recLogo2
             x: 60
             height: 221
             color: "#9069fa"
@@ -781,7 +743,7 @@ Window{
             }
 
             Text {
-                id: lblExplication2
+                id: lblNameApp2
                 x: 79
                 y: 158
                 width: 123
@@ -828,42 +790,56 @@ Window{
             fillMode: Image.PreserveAspectFit
         }
 
-        Row {
-            id: rowBtns
+        Rectangle {
+            id: recBtns
             x: 330
             width: 70
             height: 35
             visible: true
+            color: "#00ffffff"
             anchors.right: parent.right
             anchors.top: parent.top
-            smooth: false
-            enabled: true
-            padding: 0
-            topPadding: 0
-            anchors.topMargin: 0
-            anchors.rightMargin: 0
 
-            TopBarButton{
-                id: btnMinimize
+
+
+
+            Button {
+                id: btnMin
                 width: 35
-                height: 35
-                horizontalPadding: 4
-                padding: 4
-                btnColorDefault: "#1c1d20"
-                bottomPadding: 4
-                autoRepeatDelay: 300
-                btnColorClicked: "#9069fa"
-                onClicked: {
-                    window.showMinimized()
-                }
+                height: 47
+                opacity: 1
+                text: qsTr("—")
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                font.underline: false
+                font.strikeout: false
+                flat: true
+                font.italic: true
+                font.bold: true
+                font.family: "LED Real"
+                font.pointSize: 15
+                anchors.leftMargin: 0
+                z: 0
+                onClicked: window.showMinimized()
             }
 
-
-
-            TopBarButton {
+            Button {
                 id: btnClose
-                btnColorClicked: "#ff0000"
-                btnIconSource: "../../images/svg_images/close_icon.svg"
+                x: 35
+                width: 35
+                height: 47
+                opacity: 1
+                text: "\u2715"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                down: false
+                flat: true
+                font.italic: false
+                font.bold: false
+                font.pointSize: 17
+                font.family: "ChromiumAATTest"
+                anchors.rightMargin: 0
+                z: 0
                 onClicked: window.close()
             }
         }
@@ -892,6 +868,7 @@ Window{
         }
 
     }
+    }//end backgroundImage
 
 
     Connections {
@@ -976,7 +953,7 @@ Window{
 
         }
         function onWin(){
-            btnRevenirAcceil.visible = true
+            btnBackHome.visible = true
         }
 
     }
