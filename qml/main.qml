@@ -6,6 +6,8 @@ Window{
     id: window
     width: 400
     height: 580
+    maximumWidth: 400
+    maximumHeight : 580
     x : Screen.width / 2 - width / 2
     y : Screen.height / 2 - height / 2
     visible: true
@@ -15,7 +17,7 @@ Window{
     property bool playWithComputer: true
 
     // SET FLAGS
-    flags: Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint | Qt.CustomizeWindowHint | Qt.MSWindowsFixedSizeDialogHint | Qt.WindowTitleHint | Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint | Qt.CustomizeWindowHint  | Qt.WindowTitleHint | Qt.Window | Qt.FramelessWindowHint
 
     // SET MATERIAL STYLE
     Material.theme: Material.Dark
@@ -656,7 +658,7 @@ Window{
             height: 57
             opacity: 1
             visible: false
-            text: qsTr("Revenir à l'acceil")
+            text: qsTr("Revenir à l'accueil")
             anchors.top: parent.top
             z: 0
             anchors.topMargin: 433
@@ -846,19 +848,13 @@ Window{
 
         Label {
             id: lblNameOfGame
-            x: 46
-            width: 241
             color: "#c3cbdd"
             text: qsTr("Morpion")
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors.fill: parent
             verticalAlignment: Text.AlignVCenter
-            anchors.bottomMargin: 0
-            anchors.topMargin: 0
-            anchors.rightMargin: 113
+            anchors.rightMargin: 70
+            anchors.leftMargin: 45
             font.pointSize: 10
-            anchors.leftMargin: 5
         }
 
         DragHandler {
