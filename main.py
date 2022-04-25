@@ -74,7 +74,7 @@ class MainWindow(QObject):
                 #self.grille.emit(self.game.grille, 0) #1 = ordinateur, 0 = joueur
                 self.move.emit(self.game.grille, self.pos)
 
-                if self.game.playWithAI == True and self.game.whoPlay == self.game.computerOrPlayer2:
+                if self.game.playWithAI == True and self.game.whoPlay == self.game.computerOrPlayer2 and not self.game.checkWin(self.game.grille) and not self.game.checkEquality():
                     self.game.tour += 1
                     move = self.game.bestMoveForAI()
                     if self.game.checkWin(self.game.grille): self.status.emit(f"Nous avons un gagnant ! '{self.game.whoPlay}' a gagné."); self.win.emit()
