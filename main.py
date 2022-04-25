@@ -39,12 +39,14 @@ class MainWindow(QObject):
             playWithComputer (bool)
         """
         self.game = Morpion(signePlayer1, whoStart, playWithComputer)
-        
         if self.game.playWithAI == True and self.game.whoPlay == self.game.computerOrPlayer2:
             self.game.tour += 1
-            self.game.bestMoveForAI()
+            move = self.game.bestMoveForAI()
+            if self.game.checkWin(self.game.grille): self.status.emit(f"Nous avons un gagnant ! '{self.game.whoPlay}' a gagné."); self.win.emit()
+            elif self.game.checkEquality(): self.status.emit("Egalité"); self.win.emit()
             self.game.whoPlay = "O" if self.game.whoPlay == "X" else "X" #Changement de joueur pour que le suivant joue
-            self.grille.emit(self.game.grille, 1) #1 = ordinateur, 0 = joueur
+            sleep(.15)
+            self.move.emit(self.game.grille, move)
         self.status.emit(f"Au tour de '{self.game.whoPlay}'")
         
 
