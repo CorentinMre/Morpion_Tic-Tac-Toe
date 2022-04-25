@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import QtQuick.Timeline 1.0
 
 Window{
     id: window
@@ -33,24 +34,11 @@ Window{
         function play(){
             
             btnBackHome.visible = false
-            imgCase1.source = ""
-            imgCase2.source = ""
-            imgCase3.source = ""
-            imgCase4.source = ""
-            imgCase5.source = ""
-            imgCase6.source = ""
-            imgCase7.source = ""
-            imgCase8.source = ""
-            imgCase9.source = ""
-            btnCase1.hoverEnabled = true
-            btnCase2.hoverEnabled = true
-            btnCase3.hoverEnabled = true
-            btnCase4.hoverEnabled = true
-            btnCase5.hoverEnabled = true
-            btnCase6.hoverEnabled = true
-            btnCase7.hoverEnabled = true
-            btnCase8.hoverEnabled = true
-            btnCase9.hoverEnabled = true
+
+            for (var i = 1; i <= 9; i++) {
+                eval("imgCase"+i).source = ""
+                eval("btnCase"+i).hoverEnabled = true
+            }
             backend.start(switchForSigne.text, switchSigneForWhoStart.text, playWithComputer)
             recPlay.visible = true
             recHome.visible = false
@@ -72,6 +60,8 @@ Window{
             recHelp.visible = false
             recHome.visible = false
         }
+
+
 
     }
 
@@ -100,6 +90,8 @@ Window{
             id: recLogo
             x: 60
             height: 221
+            opacity: 0
+            visible: true
             color: "#9069fa"
             radius: 10
             anchors.left: parent.left
@@ -148,6 +140,7 @@ Window{
             y: 279
             width: 101
             height: 30
+            opacity: 1
             layer.enabled: false
             
             onClicked : {
@@ -176,11 +169,12 @@ Window{
             y: 315
             width: 384
             height: 222
+            opacity: 1
             visible: true
             color: "#00ffffff"
             Button {
                 id: btnPlay
-                x: 42
+                x: 143
                 y: 161
                 width: 98
                 height: 46
@@ -188,8 +182,6 @@ Window{
                 text: qsTr("Jouer")
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 15
-                anchors.horizontalCenterOffset: 0
-                anchors.horizontalCenter: parent.horizontalCenter
                 z: 0
                 onClicked: internal.play()
             }
@@ -372,7 +364,6 @@ Window{
             cache: true
             fillMode: Image.PreserveAspectFit
 
-
             Button {
                 id: btnCase1
                 x: 61
@@ -394,6 +385,7 @@ Window{
                     id: imgCase1
                     x: 20
                     y: 27
+                    opacity: 1
                     anchors.fill: parent
                     source: ""
                     anchors.rightMargin: 5
@@ -866,6 +858,66 @@ Window{
     }
     }//end backgroundImage
 
+    Timeline {
+        id: timeline
+        animations: [
+            TimelineAnimation {
+                id: timelineAnimation
+                running: true
+                duration: 1000
+                loops: 1
+                to: 1000
+                from: 0
+            }
+        ]
+        startFrame: 0
+        endFrame: 2000
+        enabled: true
+
+        KeyframeGroup {
+            target: recLogo
+            property: "opacity"
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 436
+                value: 1
+            }
+        }
+
+        KeyframeGroup {
+            target: switchPlayWithBotOrPlayer
+            property: "opacity"
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 684
+                value: 1
+            }
+        }
+
+        KeyframeGroup {
+            target: recStart
+            property: "opacity"
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 1045
+                value: 1
+            }
+        }
+    }
+
+
 
     Connections {
         target: backend
@@ -873,78 +925,15 @@ Window{
 
         function onStatus(info){lblInfo.text=info}
 
-        function onGrille(grille){
+        function onMove(grille, move){
 
-            if(grille[0] === "X"){
-                imgCase1.source = "../images/cross.png"
-                btnCase1.hoverEnabled = false
-            }else if(grille[0] === "O"){
-                imgCase1.source = "../images/circle.png"
-                btnCase1.hoverEnabled = false
-            }
-            
-            if(grille[1] === "X"){
-                imgCase2.source = "../images/cross.png"
-                btnCase2.hoverEnabled = false
-            }else if(grille[1] === "O"){
-                imgCase2.source = "../images/circle.png"
-                btnCase2.hoverEnabled = false
-            }
 
-            if(grille[2] === "X"){
-                imgCase3.source = "../images/cross.png"
-                btnCase3.hoverEnabled = false
-            }else if(grille[2] === "O"){
-                imgCase3.source = "../images/circle.png"
-                btnCase3.hoverEnabled = false
-            }
-
-            if(grille[3] === "X"){
-                imgCase4.source = "../images/cross.png"
-                btnCase4.hoverEnabled = false
-            }else if(grille[3] === "O"){
-                imgCase4.source = "../images/circle.png"
-                btnCase4.hoverEnabled = false
-            }
-
-            if(grille[4] === "X"){
-                imgCase5.source = "../images/cross.png"
-                btnCase5.hoverEnabled = false
-            }else if(grille[4] === "O"){
-                imgCase5.source = "../images/circle.png"
-                btnCase5.hoverEnabled = false
-            }
-
-            if(grille[5] === "X"){
-                imgCase6.source = "../images/cross.png"
-                btnCase6.hoverEnabled = false
-            }else if(grille[5] === "O"){
-                imgCase6.source = "../images/circle.png"
-                btnCase6.hoverEnabled = false
-            }
-
-            if(grille[6] === "X"){
-                imgCase7.source = "../images/cross.png"
-                btnCase7.hoverEnabled = false
-            }else if(grille[6] === "O"){
-                imgCase7.source = "../images/circle.png"
-                btnCase7.hoverEnabled = false
-            }
-
-            if(grille[7] === "X"){
-                imgCase8.source = "../images/cross.png"
-                btnCase8.hoverEnabled = false
-            }else if(grille[7] === "O"){
-                imgCase8.source = "../images/circle.png"
-                btnCase8.hoverEnabled = false
-            }
-
-            if(grille[8] === "X"){
-                imgCase9.source = "../images/cross.png"
-                btnCase9.hoverEnabled = false
-            }else if(grille[8] === "O"){
-                imgCase9.source = "../images/circle.png"
-                btnCase9.hoverEnabled = false
+            if(grille[move] === "X"){
+                eval("imgCase"+(move+1)).source = "../images/cross.png"
+                eval("btnCase"+(move+1)).hoverEnabled = false
+            }else if(grille[move] === "O"){
+                eval("imgCase"+(move+1)).source = "../images/circle.png"
+                eval("btnCase"+(move+1)).hoverEnabled = false
             }
 
         }
