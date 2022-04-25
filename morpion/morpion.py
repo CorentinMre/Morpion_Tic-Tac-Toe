@@ -101,8 +101,11 @@ class Morpion:
     def bestMoveForAI(self):
         """
         Meilleur coup pour l'ordinateur
+
+        Returns:
+            int: Renvoie l'emplacement de la case où l'ordinateur a joué
         
-        
+        **Aide**
         Cette fonction doit créer une grille virtuelle
         
         - Pour voir si un coup est potentiellement gagnant en ramplant chaque " " 
@@ -149,7 +152,7 @@ class Morpion:
                         ║   ║   ║   ║           ║   ║   ║   ║
                         ╚═══╩═══╩═══╝           ╚═══╩═══╩═══╝
                         
-            -> Sinon en tente de jouer dans les angles si possible
+            -> Sinon on tente de jouer dans les angles si possible
         
         (il est fortement conseillé d'utiliser la fonction placeInTheGrille() pour vérifier le coup)
         
@@ -163,7 +166,7 @@ class Morpion:
                 grille[i] = self.whoPlay
                 if self.checkWin(grille):
                     self.grille[i] = self.whoPlay
-                    return
+                    return i
                 else:
                     grille[i] = " "
                     
@@ -177,7 +180,7 @@ class Morpion:
                 grille[i] = joueur1
                 if self.checkWin(grille):
                     self.grille[i] = self.whoPlay
-                    return
+                    return i
                 else:
                     grille[i] = " "
             
@@ -185,26 +188,26 @@ class Morpion:
         
         # tentative de jouer au centre sauf au deuxieme tour si l'ordinateur commence à jouer
         if self.tour > 1:
-            if self.placeInTheGrille(4) : return
+            if self.placeInTheGrille(4) : return 4
         
         # tentative de jouer sur les arretes si le joueur joue dans les coins
         posPlayer = [i for i, x in enumerate(grille) if x == self.player1]
 
         if 0 in posPlayer:
-            if self.placeInTheGrille(3) : return
+            if self.placeInTheGrille(3) : return 3
         if 2 in posPlayer:
-            if self.placeInTheGrille(1) : return 
+            if self.placeInTheGrille(1) : return 1
         if 6 in posPlayer:
-            if self.placeInTheGrille(7): return
+            if self.placeInTheGrille(7): return 7
         if 8 in posPlayer:
-            if self.placeInTheGrille(5): return
+            if self.placeInTheGrille(5): return 5
             
             
         # tentative de jouer dans les coins
-        if self.placeInTheGrille(0): return
-        if self.placeInTheGrille(2): return
-        if self.placeInTheGrille(6): return
-        if self.placeInTheGrille(8): return
+        if self.placeInTheGrille(0): return 0
+        if self.placeInTheGrille(2): return 2
+        if self.placeInTheGrille(6): return 6
+        if self.placeInTheGrille(8): return 8
         
 
 def clear():
